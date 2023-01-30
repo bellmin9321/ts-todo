@@ -1,9 +1,15 @@
-import React, { ChangeEvent, KeyboardEvent, useEffect, useRef } from 'react';
+import React, {
+  ChangeEvent,
+  FC,
+  KeyboardEvent,
+  useEffect,
+  useRef,
+} from 'react';
 import { useRecoilState } from 'recoil';
 import { todoListState, todoTextState } from '../../recoil';
 import Input from '../Input';
 
-function Header() {
+const Header: FC = () => {
   const [todoList, setTodoList] = useRecoilState<string[]>(todoListState);
   const [text, setText] = useRecoilState<string>(todoTextState);
 
@@ -40,6 +46,6 @@ function Header() {
       />
     </div>
   );
-}
+};
 
 export default Header;
