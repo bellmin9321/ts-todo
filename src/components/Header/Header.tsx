@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { todoListState, todoTextState } from '../../recoil';
+import Input from '../Input';
 
 function Header() {
   const [todoList, setTodoList] = useRecoilState<string[]>(todoListState);
@@ -9,33 +10,31 @@ function Header() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (inputRef.current !== null) {
-      inputRef.current.focus();
-    }
+    inputRef.current!.focus();
   });
 
-  const onChangeText = (e: React.ChangeEvent<HTMLInputElement | null>) => {
+  const onChangeText = (e: ChangeEvent<HTMLInputElement | null>) => {
     setText(e.target.value);
   };
 
   // KeyboardEvent 참고 https://minjs.tistory.com/2
-  const onAddTodoText = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && inputRef.current !== null) {
+  const onAddTodo = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
       setText('');
       setTodoList([...todoList, text]);
-      inputRef.current.focus();
+      inputRef.current?.focus();
     }
   };
 
   return (
     <div className="m-0 h-24 flex-row content-center justify-center bg-black">
       <div className="text-4xl font-bold text-yellow-300">TODO LIST</div>
-      <input
+      <Input
         type="text"
         placeholder=" 할 일을 입력하세요"
         className="text-m mt-5 w-1/3"
         onChange={onChangeText}
-        onKeyDown={onAddTodoText}
+        onKeyDown={onAddTodo}
         value={text}
         ref={inputRef}
       />
