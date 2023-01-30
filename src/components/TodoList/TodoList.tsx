@@ -14,6 +14,11 @@ function TodoList() {
       : setDoneList([...filtered]);
   };
 
+  const handleDone = (index: number) => {
+    doneList.push(todoList.splice(index, 1)[0]);
+    setDoneList([...doneList]);
+  };
+
   return (
     <section className="m-0 flex h-screen flex-row bg-sky-300 font-bold">
       <ul className="flex h-2/3 w-1/2 flex-col items-center justify-center border-r border-inherit bg-white">
@@ -24,8 +29,15 @@ function TodoList() {
               <div key={uuidv4()}>
                 <div className="flex  justify-between ">
                   <span className="mb-2">
-                    <input type="checkbox" className="mr-2" />
-                    <li className="inline-block hover:cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      onClick={() => handleDone(i)}
+                    />
+                    <li
+                      className="inline-block hover:cursor-pointer"
+                      onClick={() => handleDone(i)}
+                    >
                       {todo}
                     </li>
                   </span>
