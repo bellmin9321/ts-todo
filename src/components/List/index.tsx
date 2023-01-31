@@ -11,7 +11,13 @@ const List = ({
 }: ListProps) => {
   return (
     <ul className="flex h-2/3 w-1/2 flex-col items-center justify-center border-r border-inherit bg-white">
-      <div className="h-1/8 w-full bg-blue-600 text-white">{state}</div>
+      <div
+        className={`h-1/8  + w-full  text-white ${
+          state === 'DONE' ? 'bg-red-600' : 'bg-blue-600'
+        }`}
+      >
+        {state}
+      </div>
       <div className="my-5 mx-3 flex h-full w-2/3 flex-col justify-center">
         {list.map((item, i) => {
           const { id, title, status } = item;
