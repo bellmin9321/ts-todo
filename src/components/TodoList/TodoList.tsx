@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useRecoilState } from 'recoil';
 import { todoListState } from '../../recoil';
+import { Input } from '../Input';
 
-function TodoList() {
+const TodoList: FC = () => {
   const [todoList, setTodoList] = useRecoilState<string[]>(todoListState);
   const [doneList, setDoneList] = useState<string[]>([]);
 
@@ -15,7 +16,9 @@ function TodoList() {
   };
 
   const handleDone = (index: number) => {
-    doneList.push(todoList.splice(index, 1)[0]);
+    const copiedList = [...todoList];
+    doneList.push(copiedList.splice(index, 1)[0]);
+    setTodoList([...copiedList]);
     setDoneList([...doneList]);
   };
 
@@ -29,15 +32,12 @@ function TodoList() {
               <div key={uuidv4()}>
                 <div className="flex  justify-between ">
                   <span className="mb-2">
-                    <input
+                    <Input
                       type="checkbox"
                       className="mr-2"
                       onClick={() => handleDone(i)}
                     />
-                    <li
-                      className="inline-block hover:cursor-pointer"
-                      onClick={() => handleDone(i)}
-                    >
+                    <li className="inline-block hover:cursor-pointer">
                       {todo}
                     </li>
                   </span>
@@ -77,6 +77,6 @@ function TodoList() {
       </ul>
     </section>
   );
-}
+};
 
 export default TodoList;
