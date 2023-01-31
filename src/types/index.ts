@@ -1,9 +1,10 @@
-import { HTMLProps, ChangeEvent, KeyboardEvent, RefObject } from 'react';
+import { HTMLProps, ChangeEvent, KeyboardEvent } from 'react';
 
-export interface TodoList {
+export interface TodoListType {
   id: string;
   title: string;
-  desc: string;
+  desc?: string;
+  status: string;
 }
 
 export interface InputProps extends HTMLProps<HTMLInputElement> {
