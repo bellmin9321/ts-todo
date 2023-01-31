@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { useRecoilValue } from 'recoil';
 import { doneListState, todoListState } from '../../recoil';
-import { Input } from '../Input';
 import Modal from '../Modal';
 import useTodo from '../../hooks/useTodo';
 import List from '../List';
+import TodoDetail from '../TodoDetail.tsx';
 
 const TodoList: FC = () => {
   const {
@@ -34,7 +34,12 @@ const TodoList: FC = () => {
         onShowTodoDetail={showTodoDetail}
         onDeleteTodo={deleteTodo}
       />
-      {isOpenModal && <Modal todo={todo} handleModal={setOpenModal} />}
+      {isOpenModal && (
+        <Modal
+          component={<TodoDetail todo={todo} />}
+          handleModal={setOpenModal}
+        />
+      )}
     </section>
   );
 };
