@@ -11,3 +11,11 @@ export interface InputProps extends HTMLProps<HTMLInputElement> {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
 }
+
+export interface ListProps {
+  state: string;
+  list: TodoListType[];
+  onCheckTodo: (id: string, status: string) => void;
+  onShowTodoDetail: (item: TodoListType) => void;
+  onDeleteTodo: (index: number) => void;
+}
