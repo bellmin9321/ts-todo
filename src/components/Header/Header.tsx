@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { useRecoilState } from 'recoil';
 import { todoListState, todoTextState } from '../../recoil';
-import Input from '../Input';
+import { Input } from '../Input';
 
 const Header: FC = () => {
   const [todoList, setTodoList] = useRecoilState<string[]>(todoListState);
@@ -16,8 +16,8 @@ const Header: FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    inputRef.current!.focus();
-  });
+    inputRef.current?.focus();
+  }, []);
 
   const onChangeText = (e: ChangeEvent<HTMLInputElement | null>) => {
     setText(e.target.value);

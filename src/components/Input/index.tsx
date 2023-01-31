@@ -1,8 +1,16 @@
-import React, { FC, ForwardedRef, forwardRef } from 'react';
+import React, { ForwardedRef, forwardRef } from 'react';
 import { InputProps } from '../../types';
 
 const InputInner = (
-  { type, placeholder, className, onChange, onKeyDown, value }: InputProps,
+  {
+    type,
+    placeholder,
+    className,
+    onChange,
+    onKeyDown,
+    onClick,
+    value,
+  }: InputProps,
   ref: ForwardedRef<HTMLInputElement>,
 ) => {
   return (
@@ -12,6 +20,7 @@ const InputInner = (
       className={className}
       onChange={onChange}
       onKeyDown={onKeyDown}
+      onClick={onClick}
       value={value}
       ref={ref}
     />
