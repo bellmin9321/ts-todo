@@ -28,7 +28,7 @@ export interface ListProps {
   list: TodoListType[];
   onCheckTodo: (id: string, status: string) => void;
   onShowTodoDetail: (item: TodoListType) => void;
-  onDeleteTodo: (index: number) => void;
+  onDeleteTodo: (id: string) => void;
 }
 
 export interface ModalProps {

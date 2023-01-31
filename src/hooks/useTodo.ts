@@ -13,14 +13,15 @@ const useTodo = () => {
   });
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
 
-  const deleteTodo = (index: number): void => {
+  const deleteTodo = (id: string): void => {
     const tempList = [...todoList];
-    tempList.splice(index, 1);
+    const targetIndex = tempList.findIndex(target => target.id === id);
+    tempList.splice(targetIndex, 1);
 
     setTodoList([...tempList]);
   };
 
-  const checkTodo = (id: string, state: string) => {
+  const checkTodo = (id: string, state: string): void => {
     const tempList = [...todoList];
     const targetIndex = tempList.findIndex(target => target.id === id);
 

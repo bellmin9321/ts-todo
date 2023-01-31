@@ -38,7 +38,7 @@ const List = ({
                   </li>
                 </span>
                 <span>
-                  <button onClick={() => onDeleteTodo(i)}>❌</button>
+                  <button onClick={() => onDeleteTodo(id)}>❌</button>
                 </span>
               </div>
               {i < list.length - 1 && <hr className="mb-2" />}
