@@ -9,7 +9,9 @@ const InputInner = (
     onChange,
     onKeyDown,
     onClick,
+    defaultValue,
     value,
+    defaultChecked,
   }: InputProps,
   ref: ForwardedRef<HTMLInputElement>,
 ) => {
@@ -21,7 +23,9 @@ const InputInner = (
       onChange={onChange}
       onKeyDown={onKeyDown}
       onClick={onClick}
+      defaultValue={defaultValue}
       value={value}
+      defaultChecked={defaultChecked}
       ref={ref}
     />
   );
