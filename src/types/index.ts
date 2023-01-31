@@ -1,4 +1,11 @@
-import { HTMLProps, ChangeEvent, KeyboardEvent, ReactNode } from 'react';
+import {
+  HTMLProps,
+  ChangeEvent,
+  KeyboardEvent,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 
 export interface TodoListType {
   id: string;
@@ -22,6 +29,11 @@ export interface ListProps {
   onCheckTodo: (id: string, status: string) => void;
   onShowTodoDetail: (item: TodoListType) => void;
   onDeleteTodo: (index: number) => void;
+}
+
+export interface ModalProps {
+  handleModal: Dispatch<SetStateAction<boolean>>;
+  component: ReactNode;
 }
 
 export interface ModalLayoutProps {
