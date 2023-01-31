@@ -31,7 +31,9 @@ const List = ({
                     defaultChecked={state === 'DONE' ?? false}
                   />
                   <li
-                    className="inline-block hover:cursor-pointer"
+                    className={`inline-block hover:cursor-pointer ${
+                      state === 'DONE' ? 'line-through' : null
+                    }`}
                     onClick={() => onShowTodoDetail(item)}
                   >
                     {title}
