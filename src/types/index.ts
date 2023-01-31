@@ -7,6 +7,10 @@ export interface TodoListType {
   status: string;
 }
 
+export interface TodoDetailProps {
+  todo: TodoListType;
+}
+
 export interface InputProps extends HTMLProps<HTMLInputElement> {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
