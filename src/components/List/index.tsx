@@ -1,4 +1,3 @@
-import React from 'react';
 import { ListProps } from '../../types';
 import { Input } from '../Input';
 
