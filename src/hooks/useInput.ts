@@ -22,7 +22,8 @@ const useInput = (initialState: string) => {
       status: 'todo',
     };
 
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
+      e.preventDefault();
       setTodoList([...todoList, todo]);
       setText('');
       inputRef.current?.focus();
