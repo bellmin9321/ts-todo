@@ -1,9 +1,11 @@
 import useInput from '../../hooks/useInput';
+import useTodo from '../../hooks/useTodo';
 import { TodoDetailProps } from '../../types';
 import { Input } from '../Input';
 
 const TodoDetail = ({ todo }: TodoDetailProps) => {
-  const { onChangeText } = useInput('');
+  const { onChangeText, title, desc } = useInput('');
+  const { editTodo } = useTodo();
 
   return (
     <>
@@ -25,8 +27,22 @@ const TodoDetail = ({ todo }: TodoDetailProps) => {
           defaultValue={todo.desc}
           name={'설명'}
         />
+        {/* <Input
+          type="text"
+          placeholder="설명"
+          className="mb-3 h-2/3 w-4/5 whitespace-normal border-2 border-black pl-2"
+          onChange={onChangeText}
+          defaultValue={todo.desc}
+          name={'설명'}
+        /> */}
         <div>
-          <button className="rounded-[7px] bg-blue-500 p-2 text-white">
+          <button
+            className={`rounded-[7px] p-2 text-white ${
+              title || desc ? 'bg-blue-500' : 'bg-blue-500/40'
+            }`}
+            onClick={() => editTodo(todo, title, desc)}
+            disabled={title || desc ? false : true}
+          >
             수정하기
           </button>
         </div>
