@@ -51,3 +51,8 @@ export const doneListState = selector<TodoListType[]>({
     return list.filter(item => item.status === 'done');
   },
 });
+
+export const modalState = atom<boolean>({
+  key: 'modalState',
+  default: false,
+});
