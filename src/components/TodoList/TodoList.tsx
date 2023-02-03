@@ -1,20 +1,14 @@
 import { FC } from 'react';
-import { useRecoilValue } from 'recoil';
-import { doneListState, todoListState } from '../../recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { doneListState, modalState, todoListState } from '../../recoil';
 import Modal from '../Modal';
 import useTodo from '../../hooks/useTodo';
 import List from '../List';
 import TodoDetail from '../TodoDetail.tsx';
 
 const TodoList: FC = () => {
-  const {
-    deleteTodo,
-    checkTodo,
-    showTodoDetail,
-    todo,
-    isOpenModal,
-    setOpenModal,
-  } = useTodo();
+  const { deleteTodo, checkTodo, showTodoDetail, todo } = useTodo();
+  const [isOpenModal, setOpenModal] = useRecoilState(modalState);
   const todoList = useRecoilValue(todoListState);
   const doneList = useRecoilValue(doneListState);
 
