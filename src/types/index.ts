@@ -19,6 +19,7 @@ export interface TodoDetailProps {
 }
 
 export interface InputProps extends HTMLProps<HTMLInputElement> {
+  defaultValue?: string | undefined;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
 }
