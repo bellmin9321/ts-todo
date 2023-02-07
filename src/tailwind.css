@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ul{
+  @apply my-5 mx-3 flex h-full w-2/3 flex-col justify-center;
+}
+
+.listItem {
+  @apply mb-3 flex justify-between rounded-md border-[1px] border-gray-300 bg-gray-100 py-2 px-3
+}
