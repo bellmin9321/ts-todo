@@ -1,20 +1,18 @@
-import React from 'react';
-import { RecoilRoot } from 'recoil';
-import './App.css';
+import { FC } from 'react';
+
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
+import Layout from './components/Layout';
 import TodoList from './components/TodoList/TodoList';
 
-function App() {
+const App: FC = () => {
   return (
-    <RecoilRoot>
-      <div className="App">
-        <Header />
-        <TodoList />
-        <Footer />
-      </div>
-    </RecoilRoot>
+    <Layout>
+      <Header />
+      <TodoList />
+      <Footer />
+    </Layout>
   );
-}
+};
 
 export default App;
