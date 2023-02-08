@@ -1,11 +1,10 @@
 import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { v4 as uuidv4 } from 'uuid';
-import { listState } from '../recoil';
-import { TodoListType } from '../types';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { columnsState, todoListState } from '../recoil';
 
 const useInput = (initialState: string) => {
-  const [todoList, setTodoList] = useRecoilState<TodoListType[]>(listState);
+  const todoList = useRecoilValue(todoListState);
+  const [columns, setColumns] = useRecoilState(columnsState);
   const [text, setText] = useState<string>(initialState);
   const [title, setTitle] = useState<string>(initialState);
   const [desc, setDesc] = useState<string>(initialState);
@@ -31,16 +30,22 @@ const useInput = (initialState: string) => {
 
   // KeyboardEvent 참고 https://minjs.tistory.com/2
   const addTodo = (e: KeyboardEvent<HTMLInputElement>) => {
-    const todo = {
-      id: uuidv4(),
+    const newTodo = {
+      id: todoList.length,
       title: text,
       desc: '',
-      status: 'todo',
     };
 
     if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
       e.preventDefault();
-      setTodoList([...todoList, todo]);
+      const [[columnId, column]] = Object.entries(columns).filter(
+        ([, obj]) => obj.status === 'todo',
+      );
+
+      setColumns({
+        ...columns,
+        [columnId]: { ...column, items: [...column.items, newTodo] },
+      });
       setText('');
       inputRef.current?.focus();
     }
