@@ -41,6 +41,15 @@ export const todoListState = atom<TodoListType[]>({
   default: todoList,
 });
 
+export const todoState = atom<TodoListType>({
+  key: 'todoState',
+  default: {
+    id: 0,
+    title: '',
+    desc: '',
+  },
+});
+
 export const columnsState = atom<ColumnsType>({
   key: 'columnsState',
   default: columnsOfStatus,
