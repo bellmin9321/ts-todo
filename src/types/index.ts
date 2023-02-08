@@ -8,10 +8,15 @@ import {
 } from 'react';
 
 export interface TodoListType {
-  id: string;
+  id: number;
   title: string;
   desc?: string;
-  status: string;
+}
+
+export interface ColumnsType {
+  [key: string]: {
+    items: TodoListType[];
+  };
 }
 
 export interface TodoDetailProps {
@@ -25,11 +30,15 @@ export interface InputProps extends HTMLProps<HTMLInputElement> {
 }
 
 export interface ListProps {
+  columnId: string;
+  column: { status: string; items: TodoListType[] };
+  children: ReactNode;
+}
+
+export interface ListItemProps {
   state: string;
-  list: TodoListType[];
-  onCheckTodo: (id: string, status: string) => void;
-  onShowTodoDetail: (item: TodoListType) => void;
-  onDeleteTodo: (id: string) => void;
+  item: TodoListType;
+  index: number;
 }
 
 export interface ModalProps {
