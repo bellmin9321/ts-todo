@@ -39,7 +39,15 @@ const useTodo = () => {
     };
     tempList.splice(targetIndex, 1, tempTarget);
 
+    const [[columnId, column]] = Object.entries(columns).filter(
+      ([, obj]) => obj.status === 'todo',
+    );
+
     setTodoList([...tempList]);
+    setColumns({
+      ...columns,
+      [columnId]: { ...column, items: [...tempList] },
+    });
     setOpenModal(false);
   };
 
