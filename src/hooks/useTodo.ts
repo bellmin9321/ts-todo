@@ -1,19 +1,13 @@
-import { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { listState, modalState } from '../recoil';
+import { todoListState, modalState, todoState } from '../recoil';
 import { TodoListType } from '../types';
 
 const useTodo = () => {
-  const [todoList, setTodoList] = useRecoilState(listState);
+  const [todoList, setTodoList] = useRecoilState(todoListState);
+  const [todo, setTodo] = useRecoilState(todoState);
   const setOpenModal = useSetRecoilState(modalState);
-  const [todo, setTodo] = useState<TodoListType>({
-    id: '',
-    title: '',
-    desc: '',
-    status: '',
-  });
 
-  const deleteTodo = (id: string): void => {
+  const deleteTodo = (id: number): void => {
     const tempList = [...todoList];
     const targetIndex = tempList.findIndex(target => target.id === id);
     tempList.splice(targetIndex, 1);
@@ -40,7 +34,7 @@ const useTodo = () => {
     setOpenModal(false);
   };
 
-  const checkTodo = (id: string, state: string): void => {
+  const checkTodo = (id: number, state: string): void => {
     const tempList = [...todoList];
     const targetIndex = tempList.findIndex(target => target.id === id);
 
