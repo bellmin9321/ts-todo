@@ -1,9 +1,10 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { todoListState, modalState, todoState } from '../recoil';
+import { todoListState, modalState, todoState, columnsState } from '../recoil';
 import { TodoListType } from '../types';
 
 const useTodo = () => {
   const [todoList, setTodoList] = useRecoilState(todoListState);
+  const [columns, setColumns] = useRecoilState(columnsState);
   const [todo, setTodo] = useRecoilState(todoState);
   const setOpenModal = useSetRecoilState(modalState);
 
@@ -12,7 +13,15 @@ const useTodo = () => {
     const targetIndex = tempList.findIndex(target => target.id === id);
     tempList.splice(targetIndex, 1);
 
+    const [[columnId, column]] = Object.entries(columns).filter(
+      ([, obj]) => obj.status === 'todo',
+    );
+
     setTodoList([...tempList]);
+    setColumns({
+      ...columns,
+      [columnId]: { ...column, items: [...tempList] },
+    });
   };
 
   const editTodo = (
