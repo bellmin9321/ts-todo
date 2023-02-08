@@ -10,7 +10,6 @@ import List from '../List';
 import ListItem from '../List/ListItem';
 
 const TodoList = () => {
-  const { todo } = useTodo();
   const [columns, setColumns] = useRecoilState(columnsState);
 
   const [isOpenModal, setOpenModal] = useRecoilState(modalState);
@@ -61,70 +60,12 @@ const TodoList = () => {
             ))}
           </List>
         ))}
-        {/* {stateArray.map((list: TodoStateType) => (
-          <List state={list.state}>
-            {list.items.map((item: TodoListType, index: number) => (
-              <ListItem state={list.state} item={item} index={index} />
-            ))}
-          </List>
-        ))} */}
       </DragDropContext>
       {isOpenModal && (
-        <Modal
-          component={<TodoDetail todo={todo} />}
-          handleModal={setOpenModal}
-        />
+        <Modal component={<TodoDetail />} handleModal={setOpenModal} />
       )}
     </section>
   );
 };
-// const TodoList = () => {
-//   const { todo, setTodoList } = useTodo();
-//   const [isOpenModal, setOpenModal] = useRecoilState(modalState);
-//   const todoList = useRecoilValue(todoListState);
-//   const doneList = useRecoilValue(doneListState);
-
-//   const stateArray = [
-//     { item: todoList, state: 'TODO' },
-//     { item: doneList, state: 'DONE' },
-//   ];
-
-//   const dropHandler = (result: DropResult) => {
-//     const { destination, draggableId } = result;
-//     if (!destination?.droppableId) return;
-
-//     const newStatus: string = destination?.droppableId;
-//     const todoId: string = draggableId;
-
-//     const tempTodoList = [...todoList];
-//     const originTodo = tempTodoList.find(todo => todo.id === todoId);
-//     if (!originTodo) return;
-
-//     const originIndex = tempTodoList.indexOf(originTodo);
-//     const newTodo = { ...originTodo, ['status']: newStatus };
-//     tempTodoList.splice(originIndex, 1, newTodo);
-//     setTodoList([...tempTodoList]);
-//   };
-
-//   return (
-//     <section className="m-0 flex h-screen flex-row bg-sky-300 font-bold">
-//       <DragDropContext onDragEnd={dropHandler}>
-//         <>
-//           {stateArray.map((list: TodoStateType, index) => {
-//             return <List list={list.item} state={list.state} key={index} />;
-//           })}
-//         </>
-//       </DragDropContext>
-//       {/* <List state={'(TODO)'} list={todoList} />
-//       <List state={'DONE'} list={doneList} /> */}
-//       {isOpenModal && (
-//         <Modal
-//           component={<TodoDetail todo={todo} />}
-//           handleModal={setOpenModal}
-//         />
-//       )}
-//     </section>
-//   );
-// };
 
 export default memo(TodoList);
