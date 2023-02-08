@@ -1,11 +1,10 @@
 import useInput from '../../hooks/useInput';
 import useTodo from '../../hooks/useTodo';
-import { TodoDetailProps } from '../../types';
 import { Input } from '../Input';
 
-const TodoDetail = ({ todo }: TodoDetailProps) => {
+const TodoDetail = () => {
   const { onChangeText, title, desc } = useInput('');
-  const { editTodo } = useTodo();
+  const { editTodo, todo } = useTodo();
 
   return (
     <>
