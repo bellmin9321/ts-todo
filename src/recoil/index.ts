@@ -31,6 +31,10 @@ export const columnsOfStatus = {
     items: todoList,
   },
   [uuidv4()]: {
+    status: 'in-progress',
+    items: [],
+  },
+  [uuidv4()]: {
     status: 'done',
     items: [],
   },
