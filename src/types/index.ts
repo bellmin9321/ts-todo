@@ -15,12 +15,9 @@ export interface TodoListType {
 
 export interface ColumnsType {
   [key: string]: {
+    status: string;
     items: TodoListType[];
   };
-}
-
-export interface TodoDetailProps {
-  todo: TodoListType;
 }
 
 export interface InputProps extends HTMLProps<HTMLInputElement> {
@@ -32,6 +29,7 @@ export interface InputProps extends HTMLProps<HTMLInputElement> {
 export interface ListProps {
   columnId: string;
   column: { status: string; items: TodoListType[] };
+  index: number;
   children: ReactNode;
 }
 
