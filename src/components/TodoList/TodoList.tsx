@@ -1,26 +1,19 @@
-import { memo, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import {
-  modalState,
-  // doneListState,
-  // todoListState,
-  columnsOfStatus,
-} from '../../recoil';
+import { memo } from 'react';
+import { useRecoilState } from 'recoil';
+import { modalState, columnsState } from '../../recoil';
 import Modal from '../Modal';
 import useTodo from '../../hooks/useTodo';
 import TodoDetail from '../TodoDetail.tsx';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { TodoListType, TodoStateType } from '../../types';
+import { TodoListType } from '../../types';
 import List from '../List';
 import ListItem from '../List/ListItem';
 
 const TodoList = () => {
-  const { todo, dragTodo } = useTodo();
-  const [columns, setColumns] = useState(columnsOfStatus);
+  const { todo } = useTodo();
+  const [columns, setColumns] = useRecoilState(columnsState);
 
   const [isOpenModal, setOpenModal] = useRecoilState(modalState);
-  // const todoList = useRecoilValue(todoListState);
-  // const doneList = useRecoilValue(doneListState);
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result;
@@ -61,10 +54,10 @@ const TodoList = () => {
   return (
     <section className="m-0 flex h-screen flex-row bg-sky-300 font-bold">
       <DragDropContext onDragEnd={onDragEnd}>
-        {Object.entries(columns).map(([columnId, column]) => (
-          <List columnId={columnId} column={column}>
+        {Object.entries(columns).map(([columnId, column], i) => (
+          <List columnId={columnId} column={column} index={i}>
             {column.items.map((item: TodoListType, index: number) => (
-              <ListItem state={columnId} item={item} index={index} />
+              <ListItem state={column.status} item={item} index={index} />
             ))}
           </List>
         ))}
