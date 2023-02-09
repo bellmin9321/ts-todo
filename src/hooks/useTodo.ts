@@ -51,17 +51,23 @@ const useTodo = () => {
     setOpenModal(false);
   };
 
-  const checkTodo = (id: number, state: string): void => {
-    const tempList = [...todoList];
+  const checkTodo = (columnId: string, id: number): void => {
+    const sorceColumn = columns[columnId];
+
+    const tempList = [...sorceColumn.items];
     const targetIndex = tempList.findIndex(target => target.id === id);
+    const checkedTodo = tempList.splice(targetIndex, 1)[0];
 
-    const tempTarget = {
-      ...tempList[targetIndex],
-      status: state === 'todo' ? 'done' : 'todo',
-    };
-    tempList.splice(targetIndex, 1);
+    const [[destinationId, column]] = Object.entries(columns).filter(
+      ([, obj]) =>
+        obj.status === (sorceColumn.status === 'todo' ? 'done' : 'todo'),
+    );
 
-    setTodoList([...tempList, tempTarget]);
+    setColumns({
+      ...columns,
+      [columnId]: { ...sorceColumn, items: [...tempList] },
+      [destinationId]: { ...column, items: [...column.items, checkedTodo] },
+    });
   };
 
   const showTodoDetail = (item: TodoListType) => {
