@@ -34,6 +34,7 @@ export interface ListProps {
 }
 
 export interface ListItemProps {
+  columnId: string;
   state: string;
   item: TodoListType;
   index: number;
