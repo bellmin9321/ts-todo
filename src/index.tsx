@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './tailwind.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { RecoilRoot } from 'recoil';
 import { worker } from './mocks/worker';
 
 if (process.env.NODE_ENV === 'development') {
@@ -15,9 +14,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RecoilRoot>
-      <App />
-    </RecoilRoot>
+    <App />
   </React.StrictMode>,
 );
 
