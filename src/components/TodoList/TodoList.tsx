@@ -2,7 +2,6 @@ import { memo } from 'react';
 import { useRecoilState } from 'recoil';
 import { modalState, columnsState } from '../../recoil';
 import Modal from '../Modal';
-import useTodo from '../../hooks/useTodo';
 import TodoDetail from '../TodoDetail.tsx';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { TodoListType } from '../../types';

@@ -1,9 +1,26 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import useInput from '../../hooks/useInput';
 import { Input } from '../Input';
 
 const Header: FC = () => {
   const { onChangeText, text, inputRef, addTodo } = useInput('');
+  const [user, setUser] = useState<string>('로그인');
+
+  const login = async () => {
+    const { status } = await fetch('/login', {
+      method: 'POST',
+    });
+
+    if (status === 200) {
+      getUserId();
+    }
+  };
+
+  const getUserId = async () => {
+    const { id } = await (await fetch('/user')).json();
+
+    setUser(id);
+  };
 
   return (
     <div className="m-0 h-24 flex-row content-center justify-center bg-black">
@@ -19,6 +36,12 @@ const Header: FC = () => {
         name={'할일'}
         ref={inputRef}
       />
+      <button
+        className="text-l absolute right-0 top-0 m-4 p-1 font-bold text-gray-100"
+        onClick={login}
+      >
+        {user}
+      </button>
     </div>
   );
 };
