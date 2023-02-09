@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { useQuery } from 'react-query';
 import useInput from '../../hooks/useInput';
 import { Input } from '../Input';
 
@@ -17,10 +18,12 @@ const Header: FC = () => {
   };
 
   const getUserId = async () => {
-    const { id } = await (await fetch('/user')).json();
-
-    setUser(id);
+    return await (await fetch('/user')).json();
   };
+
+  useQuery('login', getUserId, {
+    onSuccess: data => setUser(data.id),
+  });
 
   return (
     <div className="m-0 h-24 flex-row content-center justify-center bg-black">
