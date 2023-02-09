@@ -56,7 +56,12 @@ const TodoList = () => {
         {Object.entries(columns).map(([columnId, column], i) => (
           <List columnId={columnId} column={column} index={i}>
             {column.items.map((item: TodoListType, index: number) => (
-              <ListItem state={column.status} item={item} index={index} />
+              <ListItem
+                columnId={columnId}
+                state={column.status}
+                item={item}
+                index={index}
+              />
             ))}
           </List>
         ))}

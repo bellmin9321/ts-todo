@@ -5,7 +5,7 @@ import useTodo from '../../../hooks/useTodo';
 import { ListItemProps } from '../../../types';
 import { Input } from '../../Input';
 
-const ListItem = ({ state, item, index }: ListItemProps) => {
+const ListItem = ({ columnId, state, item, index }: ListItemProps) => {
   const { deleteTodo, checkTodo, showTodoDetail } = useTodo();
   const { id, title } = item;
 
@@ -22,7 +22,7 @@ const ListItem = ({ state, item, index }: ListItemProps) => {
             <Input
               type="checkbox"
               className="mr-2"
-              onClick={() => checkTodo(id, state)}
+              onClick={() => checkTodo(columnId, id)}
               defaultChecked={state === 'done' ?? false}
             />
             <li
