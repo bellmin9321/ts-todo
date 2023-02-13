@@ -1,9 +1,29 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import Header from './components/Header';
+import { RecoilRoot } from 'recoil';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import Layout from './components/Layout';
+import TodoList from './components/TodoList';
+import Footer from './components/Footer';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('App', () => {
+  const queryClient = new QueryClient();
+  it('renders App', () => {
+    render(
+      <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+          <Layout>
+            <Header />
+            <TodoList />
+            <Footer />
+          </Layout>
+        </QueryClientProvider>
+      </RecoilRoot>,
+    );
+
+    const title = screen.getByText('TODO LIST');
+
+    expect(title).toBeInTheDocument();
+  });
 });
