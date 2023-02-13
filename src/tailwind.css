@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.ul{
+.ul {
   @apply my-5 mx-3 flex h-full w-2/3 flex-col justify-center;
 }
 

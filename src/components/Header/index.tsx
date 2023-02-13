@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useQuery } from 'react-query';
 import useInput from '../../hooks/useInput';
 import { Input } from '../Input';
@@ -18,11 +18,12 @@ const Header: FC = () => {
   };
 
   const getUserId = async () => {
-    return await (await fetch('/user')).json();
+    const { id } = await (await fetch('/user')).json();
+    return id;
   };
 
   useQuery('login', getUserId, {
-    onSuccess: data => setUser(data.id),
+    onSuccess: id => setUser(id),
   });
 
   return (
